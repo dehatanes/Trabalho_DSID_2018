@@ -44,8 +44,23 @@ class DiferentOperationsHandlerStub(object):
         request_serializer=my__remote__procedure__call__pb2.FloatNumberMessage.SerializeToString,
         response_deserializer=my__remote__procedure__call__pb2.FloatNumberMessage.FromString,
         )
-    self.takeString_ReturnString = channel.unary_unary(
-        '/my_remote_procedure_call.DiferentOperationsHandler/takeString_ReturnString',
+    self.takeString_ReturnString1 = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeString_ReturnString1',
+        request_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+        response_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+        )
+    self.takeString_ReturnString8 = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeString_ReturnString8',
+        request_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+        response_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+        )
+    self.takeString_ReturnString64 = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeString_ReturnString64',
+        request_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+        response_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+        )
+    self.takeString_ReturnString512 = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeString_ReturnString512',
         request_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
         response_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
         )
@@ -107,9 +122,30 @@ class DiferentOperationsHandlerServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def takeString_ReturnString(self, request, context):
+  def takeString_ReturnString1(self, request, context):
     """Receives a string and returns a string
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def takeString_ReturnString8(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def takeString_ReturnString64(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def takeString_ReturnString512(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -161,8 +197,23 @@ def add_DiferentOperationsHandlerServicer_to_server(servicer, server):
           request_deserializer=my__remote__procedure__call__pb2.FloatNumberMessage.FromString,
           response_serializer=my__remote__procedure__call__pb2.FloatNumberMessage.SerializeToString,
       ),
-      'takeString_ReturnString': grpc.unary_unary_rpc_method_handler(
-          servicer.takeString_ReturnString,
+      'takeString_ReturnString1': grpc.unary_unary_rpc_method_handler(
+          servicer.takeString_ReturnString1,
+          request_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+          response_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+      ),
+      'takeString_ReturnString8': grpc.unary_unary_rpc_method_handler(
+          servicer.takeString_ReturnString8,
+          request_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+          response_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+      ),
+      'takeString_ReturnString64': grpc.unary_unary_rpc_method_handler(
+          servicer.takeString_ReturnString64,
+          request_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
+          response_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+      ),
+      'takeString_ReturnString512': grpc.unary_unary_rpc_method_handler(
+          servicer.takeString_ReturnString512,
           request_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
           response_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
       ),
