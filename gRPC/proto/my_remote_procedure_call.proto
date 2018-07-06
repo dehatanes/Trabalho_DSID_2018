@@ -39,7 +39,10 @@ service DiferentOperationsHandler {
   // Receives a float numbers and returns a float number
   rpc takeFloatNumber_ReturnFloatNumber (FloatNumberMessage) returns (FloatNumberMessage) {}
   // Receives a string and returns a string
-  rpc takeString_ReturnString (StringMessage) returns (StringMessage) {}
+  rpc takeString_ReturnString1 (StringMessage) returns (StringMessage) {}
+  rpc takeString_ReturnString8 (StringMessage) returns (StringMessage) {}
+  rpc takeString_ReturnString64 (StringMessage) returns (StringMessage) {}
+  rpc takeString_ReturnString512 (StringMessage) returns (StringMessage) {}
   // Receives a boolean and returns a boolean
   rpc takeBoolean_ReturnBoolean (BooleanMessage) returns (BooleanMessage) {}
   // Receives an object and returns an object
