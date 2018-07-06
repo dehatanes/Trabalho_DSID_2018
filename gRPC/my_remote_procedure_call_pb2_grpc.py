@@ -14,6 +14,11 @@ class DiferentOperationsHandlerStub(object):
     Args:
       channel: A grpc.Channel.
     """
+    self.takeNothing_ReturnNothing = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeNothing_ReturnNothing',
+        request_serializer=my__remote__procedure__call__pb2.NoMessage.SerializeToString,
+        response_deserializer=my__remote__procedure__call__pb2.NoMessage.FromString,
+        )
     self.takeIntNumber_ReturnIntNumber = channel.unary_unary(
         '/my_remote_procedure_call.DiferentOperationsHandler/takeIntNumber_ReturnIntNumber',
         request_serializer=my__remote__procedure__call__pb2.IntNumberMessage.SerializeToString,
@@ -59,6 +64,13 @@ class DiferentOperationsHandlerStub(object):
 class DiferentOperationsHandlerServicer(object):
   """The service definition.
   """
+
+  def takeNothing_ReturnNothing(self, request, context):
+    """Receive nothing and returns nothing
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
 
   def takeIntNumber_ReturnIntNumber(self, request, context):
     """Receives an int number and returns an int number
@@ -119,6 +131,11 @@ class DiferentOperationsHandlerServicer(object):
 
 def add_DiferentOperationsHandlerServicer_to_server(servicer, server):
   rpc_method_handlers = {
+      'takeNothing_ReturnNothing': grpc.unary_unary_rpc_method_handler(
+          servicer.takeNothing_ReturnNothing,
+          request_deserializer=my__remote__procedure__call__pb2.NoMessage.FromString,
+          response_serializer=my__remote__procedure__call__pb2.NoMessage.SerializeToString,
+      ),
       'takeIntNumber_ReturnIntNumber': grpc.unary_unary_rpc_method_handler(
           servicer.takeIntNumber_ReturnIntNumber,
           request_deserializer=my__remote__procedure__call__pb2.IntNumberMessage.FromString,

@@ -26,6 +26,8 @@ package my_remote_procedure_call;
 
 // The service definition.
 service DiferentOperationsHandler {
+  // Receive nothing and returns nothing
+  rpc takeNothing_ReturnNothing (NoMessage) returns (NoMessage) {}
   // Receives an int number and returns an int number
   rpc takeIntNumber_ReturnIntNumber (IntNumberMessage) returns (IntNumberMessage) {}
   // Receives 10 int numbers and returns an int number
@@ -45,6 +47,9 @@ service DiferentOperationsHandler {
 }
 
 // MESSAGES TYPES
+message NoMessage {
+}
+
 message IntNumberMessage {
   int32 item = 1;
 }
