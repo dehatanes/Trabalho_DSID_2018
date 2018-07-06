@@ -24,15 +24,13 @@ def pegaTempo(f):
         ret = f(*args)
         time2 = time.time()
         total = total + (time2 - time1) + tempoStub
-        response_dict[f.__name__] = total * 100
+        response_dict[f.__name__] = total * 1000
         return ret
     return wrap
 
 
-tempoStub = time.time()
-c = rpyc.connect("localhost", 18861)
-tempoStub = time.time() - tempoStub
-
+tempoStub = 0
+stub = None
 
 class ObjectType(object):
     def __init__(self):
@@ -40,68 +38,72 @@ class ObjectType(object):
         self.age = 2
         self.isNicePerson = False
 
+@pegaTempo
+def createStub():
+    return rpyc.connect("localhost", 18861)
 
 @pegaTempo
 def takeNothing_ReturnNothing():
-    return c.root.nothing()
+    return stub.root.nothing()
 
 
 @pegaTempo
 def takeIntNumber_ReturnIntNumber():
-    return c.root.int(2)
+    return stub.root.int(2)
 
 
 @pegaTempo
 def takeIntNumbers_ReturnIntNumber():
-    return c.root.int10int1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    return stub.root.int10int1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 
 @pegaTempo
 def takeIntNumber_ReturnIntNumbers():
-    return c.root.int1int10(1)
+    return stub.root.int1int10(1)
 
 
 @pegaTempo
 def takeLongIntNumber_ReturnLongIntNumbers():
-    return c.root.long(long(2))
+    return stub.root.long(long(2))
 
 
 @pegaTempo
 def takeFloatNumber_ReturnFloatNumber():
-    return c.root.float(0.2)
+    return stub.root.float(0.2)
 
 
 @pegaTempo
 def takeString_ReturnString1(string):
-    return c.root.string(string)
+    return stub.root.string(string)
 
 
 @pegaTempo
 def takeString_ReturnString8(string):
-    return c.root.string(string)
+    return stub.root.string(string)
 
 
 @pegaTempo
 def takeString_ReturnString64(string):
-    return c.root.string(string)
+    return stub.root.string(string)
 
 
 @pegaTempo
 def takeString_ReturnString512(string):
-    return c.root.string(string)
+    return stub.root.string(string)
 
 
 @pegaTempo
 def takeBoolean_ReturnBoolean():
-    return c.root.bool(False)
+    return stub.root.bool(False)
 
 
 @pegaTempo
 def takeObject_ReturnObject():
-    return c.root.obj(ObjectType())
+    return stub.root.obj(ObjectType())
 
 for i in range(function_tries):
     response_dict = {}
+    stub = createStub()
     print(takeNothing_ReturnNothing())
     print(takeIntNumber_ReturnIntNumber())
     print(takeIntNumbers_ReturnIntNumber())
