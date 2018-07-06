@@ -10,89 +10,113 @@ Marcel Canhisares			nUSP: 9360603
 
 import rpyc
 import time
-import json
-#time measuring
-file = open('result.html', 'w')
-function_tries = 50
+import pandas as pd
 
-#html headers
-file.write("<html><head><title>Timing</title></head><body><table><tr><th>function</th><th>time(ms)</th></tr>")
+function_tries = 20
 
-def timing(f):
+response_df = pd.DataFrame()
+response_dict = {}
+
+def pegaTempo(f):
     def wrap(*args):
         total = 0
-        ret = None
-        for i in range(function_tries):
-            time1 = time.time()
-            ret = f(*args)
-            time2 = time.time()
-            total = total + (time2 - time1)
-        file.write("<tr>")
-        file.write("<td>"+f.__name__+"</td>")
-        file.write("<td>"+str(total*100)+"</td>")
-        file.write("</tr>")
+        time1 = time.time()
+        ret = f(*args)
+        time2 = time.time()
+        total = total + (time2 - time1) + tempoStub
+        response_dict[f.__name__] = total * 100
         return ret
     return wrap
 
 
+tempoStub = time.time()
 c = rpyc.connect("localhost", 18861)
+tempoStub = time.time() - tempoStub
 
-@timing
-def method1():
-    return c.root.method1() 
 
-@timing
-def method2():
-    return c.root.method2(2)
+class ObjectType(object):
+    def __init__(self):
+        self.name = "Kleber"
+        self.age = 2
+        self.isNicePerson = False
 
-@timing
-def method3():
-    return c.root.method3(5,5,5,10,25,5,5,5) 
 
-@timing
-def method4():
-    return  c.root.method4("1", "2", "3", "4")
+@pegaTempo
+def takeNothing_ReturnNothing():
+    return c.root.nothing()
 
-@timing
-def method5():
-    return  c.root.method5("1", "2", "3", "4", "5", "6", "7", "8")
 
-@timing
-def method6():
-    return  c.root.method6("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16")
+@pegaTempo
+def takeIntNumber_ReturnIntNumber():
+    return c.root.int(2)
 
-@timing
-def method7():
-    return  c.root.method7("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32")
 
-@timing
-def method8():
-    return  c.root.method8("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64")
+@pegaTempo
+def takeIntNumbers_ReturnIntNumber():
+    return c.root.int10int1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
-@timing
-def method9():
-    return  c.root.method9("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128")
 
-@timing
-def method10():
-    return  c.root.method10("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180", "181", "182", "183", "184", "185", "186", "187", "188", "189", "190", "191", "192", "193", "194", "195", "196", "197", "198", "199", "200", "201", "202", "203", "204", "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216", "217", "218", "219", "220", "221", "222", "223", "224", "225", "226", "227", "228", "229", "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244", "245", "246", "247", "248", "249", "250", "251", "252", "253", "254")
+@pegaTempo
+def takeIntNumber_ReturnIntNumbers():
+    return c.root.int1int10(1)
 
-@timing
-def method11():
-    return c.root.method11()
 
-print(method1())
-print(method2())
-print(method3())
-print(method4())
-print(method5())
-print(method6())
-print(method7())
-print(method8())
-print(method9())
-print(method10())
-print(method11())
+@pegaTempo
+def takeLongIntNumber_ReturnLongIntNumbers():
+    return c.root.long(long(2))
 
-#Closing html tags
-file.write("</table></body></html>")
-file.close()
+
+@pegaTempo
+def takeFloatNumber_ReturnFloatNumber():
+    return c.root.float(0.2)
+
+
+@pegaTempo
+def takeString_ReturnString1(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString8(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString64(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString512(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeBoolean_ReturnBoolean():
+    return c.root.bool(False)
+
+
+@pegaTempo
+def takeObject_ReturnObject():
+    return c.root.obj(ObjectType())
+
+for i in range(function_tries):
+    response_dict = {}
+    print(takeNothing_ReturnNothing())
+    print(takeIntNumber_ReturnIntNumber())
+    print(takeIntNumbers_ReturnIntNumber())
+    print(takeIntNumber_ReturnIntNumbers())
+    print(takeLongIntNumber_ReturnLongIntNumbers())
+    print(takeFloatNumber_ReturnFloatNumber())
+    print(takeString_ReturnString1("1"))
+    print(takeString_ReturnString8("12345678"))
+    print(takeString_ReturnString64("T4OvNmxk0C1DCDEz8Kj1E10prNTR7MOzYVoSO4hAPtqg48TDYpzbh3mR36C8MqBH"))
+    print(takeString_ReturnString512(
+        "fOR8Wq04bQNFU5TxqfnnWskQD0J19nBq1KCTdcMYB3w3foSKJasnnn3xbSUH0xnGfkoLzVwEUwlYETCuIzRKVEfHRbMmU3tvu9zOqYEto0vaKmp1SmkKF5ddO0OZlpvgXJJyugJiqhMXC4OERm3aoUP4Aya6TxNoiOhwLvgnvqW5WCHjY1fXYrESZyBfSaV4ZdqOEhMfsfSSHz7lznG9pbD1xrJGv4qhbHAAgQPrBRIlhTsLBhdU01TVdt4hFFk5JtMoiquH56MYYWcknT6npm0MRVC2aC3E1Y4tYK4y0anNavWaSxcYLax6LdYeKxYFLxJYvSTcQ8aJdILgnUt1x8NfZVtocnKGHPPu6DE9UobQAZE8FXAlnG6ss6pxQXsLFURwfmIehE1FxqZWrEAzNJkniY5mZqcNSnzj5nw7cZ6ioOUn5Kjb8UeIi8uvR5TQLgZKF8IOj0c6SDFMZUqnd5dFI8EOMBwXOhMkBPzI3igzUxCDDBWB7UkIJRxeQ7Ig"))
+    print(takeBoolean_ReturnBoolean())
+    print(takeObject_ReturnObject())
+    response_df = response_df.append(response_dict, ignore_index=True)
+
+response_df.to_excel("resultados_testes.xlsx")
+response_df.describe().to_excel("resultados_analise.xlsx")
+print(response_df)
