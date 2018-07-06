@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import rpyc
 import time
+import pandas as pd
 
-# time measuring
-file = open('result.html', 'w')
-function_tries = 5
+function_tries = 20
 
-# html headers
-file.write("<html><head><title>Timing</title></head><body><table><tr><th>function</th><th>time(ms)</th></tr>")
-
+response_df = pd.DataFrame()
+response_dict = {}
 
 def pegaTempo(f):
     def wrap(*args):
@@ -17,12 +15,8 @@ def pegaTempo(f):
         ret = f(*args)
         time2 = time.time()
         total = total + (time2 - time1) + tempoStub
-        file.write("<tr>")
-        file.write("<td>" + f.__name__ + "</td>")
-        file.write("<td>" + str(total * 100) + "</td>")
-        file.write("</tr>")
+        response_dict[f.__name__] = total * 100
         return ret
-
     return wrap
 
 
@@ -69,7 +63,22 @@ def takeFloatNumber_ReturnFloatNumber():
 
 
 @pegaTempo
-def takeString_ReturnString(string):
+def takeString_ReturnString1(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString8(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString64(string):
+    return c.root.string(string)
+
+
+@pegaTempo
+def takeString_ReturnString512(string):
     return c.root.string(string)
 
 
@@ -80,24 +89,25 @@ def takeBoolean_ReturnBoolean():
 
 @pegaTempo
 def takeObject_ReturnObject():
-    return c.root.method11(ObjectType())
-
+    return c.root.obj(ObjectType())
 
 for i in range(function_tries):
+    response_dict = {}
     print(takeNothing_ReturnNothing())
     print(takeIntNumber_ReturnIntNumber())
     print(takeIntNumbers_ReturnIntNumber())
     print(takeIntNumber_ReturnIntNumbers())
     print(takeLongIntNumber_ReturnLongIntNumbers())
     print(takeFloatNumber_ReturnFloatNumber())
-    print(takeString_ReturnString("1"))
-    print(takeString_ReturnString("12345678"))
-    print(takeString_ReturnString("T4OvNmxk0C1DCDEz8Kj1E10prNTR7MOzYVoSO4hAPtqg48TDYpzbh3mR36C8MqBH"))
-    print(takeString_ReturnString(
+    print(takeString_ReturnString1("1"))
+    print(takeString_ReturnString8("12345678"))
+    print(takeString_ReturnString64("T4OvNmxk0C1DCDEz8Kj1E10prNTR7MOzYVoSO4hAPtqg48TDYpzbh3mR36C8MqBH"))
+    print(takeString_ReturnString512(
         "fOR8Wq04bQNFU5TxqfnnWskQD0J19nBq1KCTdcMYB3w3foSKJasnnn3xbSUH0xnGfkoLzVwEUwlYETCuIzRKVEfHRbMmU3tvu9zOqYEto0vaKmp1SmkKF5ddO0OZlpvgXJJyugJiqhMXC4OERm3aoUP4Aya6TxNoiOhwLvgnvqW5WCHjY1fXYrESZyBfSaV4ZdqOEhMfsfSSHz7lznG9pbD1xrJGv4qhbHAAgQPrBRIlhTsLBhdU01TVdt4hFFk5JtMoiquH56MYYWcknT6npm0MRVC2aC3E1Y4tYK4y0anNavWaSxcYLax6LdYeKxYFLxJYvSTcQ8aJdILgnUt1x8NfZVtocnKGHPPu6DE9UobQAZE8FXAlnG6ss6pxQXsLFURwfmIehE1FxqZWrEAzNJkniY5mZqcNSnzj5nw7cZ6ioOUn5Kjb8UeIi8uvR5TQLgZKF8IOj0c6SDFMZUqnd5dFI8EOMBwXOhMkBPzI3igzUxCDDBWB7UkIJRxeQ7Ig"))
     print(takeBoolean_ReturnBoolean())
     print(takeObject_ReturnObject())
+    response_df = response_df.append(response_dict, ignore_index=True)
 
-# Closing html tags
-file.write("</table></body></html>")
-file.close()
+response_df.to_excel("resultados_testes.xlsx")
+response_df.describe().to_excel("resultados_analise.xlsx")
+print(response_df)
