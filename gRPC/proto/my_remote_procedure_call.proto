@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. proto/my_remote_procedure_call.proto
+// To run the script to generate the files
+// python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. proto/my_remote_procedure_call.proto
 
 syntax = "proto3";
 

@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Universidade de São Paulo - USP
+Escola de Artes, Ciências e Humanidades - EACH
+ACH2147 - Desenvolvimento de Sistemas de Informação Distribuídos
+
+Débora Atanes Buss  		nUSP: 9276860
+Marcel Canhisares			nUSP: 9360603
+"""
 # Copyright 2015 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,7 +20,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""The Python implementation of the GRPC helloworld.Greeter client."""
 
 from __future__ import print_function
 
