@@ -23,12 +23,29 @@ Marcel Canhisares			nUSP: 9360603
 
 import grpc
 import time
+import pandas as pd
 
 import my_remote_procedure_call_pb2
 import my_remote_procedure_call_pb2_grpc
 
+QTD_ITERACOES = 20
+HOST = "localhost"
+PORT = 50051
+
+response_df = pd.DataFrame()
+response_dict = {}
+
+def pegaTempo(f):
+    def wrap(*args):
+        time1 = time.time()
+        ret = f(*args)
+        time2 = time.time()
+        total = time2 - time1
+        response_dict[f.__name__] = total * 1000
+        return ret
+    return wrap
+
 class ExampleValues(object):
-    from ObjectExample import MyObject
     void            = None 
     int_number      = 42
     int_numbers     = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -41,18 +58,23 @@ class ExampleValues(object):
     boolean         = False
     objeto          = my_remote_procedure_call_pb2.MyObject()
 
+class CasosTeste():
+    stub = None
+    
+    @pegaTempo
+    def createStub(self, channel):
+        self.stub = my_remote_procedure_call_pb2_grpc.DiferentOperationsHandlerStub(channel)
+    @pegaTempo
+    def takeNothing_ReturnNothing(self):
+        return self.stub.takeNothing_ReturnNothing(my_remote_procedure_call_pb2.NoMessage())
 
-def runTests():
-    with grpc.insecure_channel('localhost:50051') as channel:
-        # Creating stub
-        stub = my_remote_procedure_call_pb2_grpc.DiferentOperationsHandlerStub(channel)
+    @pegaTempo
+    def takeIntNumber_ReturnIntNumber(self):
+        return self.stub.takeIntNumber_ReturnIntNumber(my_remote_procedure_call_pb2.IntNumberMessage(item=ExampleValues.int_number))
 
-        # Start the tests
-        response = stub.takeNothing_ReturnNothing(my_remote_procedure_call_pb2.NoMessage())
-        print("Response: {\n" + str(response) + " }\n")
-        response = stub.takeIntNumber_ReturnIntNumber(my_remote_procedure_call_pb2.IntNumberMessage(item=ExampleValues.int_number))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeIntNumbers_ReturnIntNumber(my_remote_procedure_call_pb2.TenIntNumbersMessage(item1 = ExampleValues.int_numbers[0],
+    @pegaTempo
+    def takeIntNumbers_ReturnIntNumber(self):
+        return self.stub.takeIntNumbers_ReturnIntNumber(my_remote_procedure_call_pb2.TenIntNumbersMessage(item1 = ExampleValues.int_numbers[0],
                                                                                                         item2  = ExampleValues.int_numbers[1],
                                                                                                         item3  = ExampleValues.int_numbers[2],
                                                                                                         item4  = ExampleValues.int_numbers[3],
@@ -62,27 +84,88 @@ def runTests():
                                                                                                         item8  = ExampleValues.int_numbers[7],
                                                                                                         item9  = ExampleValues.int_numbers[8],
                                                                                                         item10 = ExampleValues.int_numbers[9]))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeIntNumber_ReturnIntNumbers(my_remote_procedure_call_pb2.IntNumberMessage(item=ExampleValues.int_number))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeLongIntNumber_ReturnLongIntNumbers(my_remote_procedure_call_pb2.LongIntNumberMessage(item=ExampleValues.long_int_number))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeFloatNumber_ReturnFloatNumber(my_remote_procedure_call_pb2.FloatNumberMessage(item=ExampleValues.float_number))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeString_ReturnString1(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_1char))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeString_ReturnString8(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_8chars))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeString_ReturnString64(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_64chars))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeString_ReturnString512(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_512chars))
-        print("Response: {\n " + str(response) + " }\n")
-        response = stub.takeBoolean_ReturnBoolean(my_remote_procedure_call_pb2.BooleanMessage(item=ExampleValues.boolean))
-        print("Response: {\n " + str(response.item) + " }\n")
-        response = stub.takeObject_ReturnObject(my_remote_procedure_call_pb2.ObjectMessage(item=ExampleValues.objeto))
-        print("Response: {\n " + str(response) + " }\n")
+
+    @pegaTempo
+    def takeIntNumber_ReturnIntNumbers(self):
+        return self.stub.takeIntNumber_ReturnIntNumbers(my_remote_procedure_call_pb2.IntNumberMessage(item=ExampleValues.int_number))
+
+    @pegaTempo
+    def takeLongIntNumber_ReturnLongIntNumbers(self):
+        return self.stub.takeLongIntNumber_ReturnLongIntNumbers(my_remote_procedure_call_pb2.LongIntNumberMessage(item=ExampleValues.long_int_number))
+
+    @pegaTempo
+    def takeFloatNumber_ReturnFloatNumber(self):
+        return self.stub.takeFloatNumber_ReturnFloatNumber(my_remote_procedure_call_pb2.FloatNumberMessage(item=ExampleValues.float_number))
+
+    @pegaTempo
+    def takeString_ReturnString1(self):
+        return self.stub.takeString_ReturnString1(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_1char))
+
+    @pegaTempo
+    def takeString_ReturnString8(self):
+        return self.stub.takeString_ReturnString8(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_8chars))
+
+    @pegaTempo
+    def takeString_ReturnString64(self):
+        return self.stub.takeString_ReturnString64(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_64chars))
+
+    @pegaTempo
+    def takeString_ReturnString512(self):
+        return self.stub.takeString_ReturnString512(my_remote_procedure_call_pb2.StringMessage(item=ExampleValues.string_512chars))
+
+    @pegaTempo
+    def takeBoolean_ReturnBoolean(self):
+        return self.stub.takeBoolean_ReturnBoolean(my_remote_procedure_call_pb2.BooleanMessage(item=ExampleValues.boolean))
+
+    @pegaTempo
+    def takeObject_ReturnObject(self):
+        return self.stub.takeObject_ReturnObject(my_remote_procedure_call_pb2.ObjectMessage(item=ExampleValues.objeto))
+
+
+def runTests(host, port):
+    with grpc.insecure_channel("{}:{}".format(host, port)) as channel:
+        casoTeste = CasosTeste()
+        # Creating stub
+        print "\tCreating stub..."
+        casoTeste.createStub(channel)
+        # Start the tests
+        casoTeste.takeNothing_ReturnNothing()
+        print "\tRunning takeNothing_ReturnNothing..."
+        casoTeste.takeIntNumber_ReturnIntNumber()
+        print "\tRunning takeIntNumber_ReturnIntNumber..."
+        casoTeste.takeIntNumbers_ReturnIntNumber()
+        print "\tRunning takeIntNumbers_ReturnIntNumber..."
+        casoTeste.takeIntNumber_ReturnIntNumbers()
+        print "\tRunning takeIntNumber_ReturnIntNumbers..."
+        casoTeste.takeLongIntNumber_ReturnLongIntNumbers()
+        print "\tRunning takeLongIntNumber_ReturnLongIntNumbers..."
+        casoTeste.takeFloatNumber_ReturnFloatNumber()
+        print "\tRunning takeFloatNumber_ReturnFloatNumber..."
+        casoTeste.takeString_ReturnString1()
+        print "\tRunning takeString_ReturnString1..."
+        casoTeste.takeString_ReturnString8()
+        print "\tRunning takeString_ReturnString8..."
+        casoTeste.takeString_ReturnString64()
+        print "\tRunning takeString_ReturnString64..."
+        casoTeste.takeString_ReturnString512()
+        print "\tRunning takeString_ReturnString512..."
+        casoTeste.takeBoolean_ReturnBoolean()
+        print "\tRunning takeBoolean_ReturnBoolean..."
+        casoTeste.takeObject_ReturnObject()
+        print "\tRunning takeObject_ReturnObject..."
 
 
 if __name__ == '__main__':
-    print ("Iniciando o client...")
-    runTests()
+    print "----------------------"
+    print "   CLIENT INICIADO    "
+    print "----------------------"
+
+    for i in range(QTD_ITERACOES):
+        print ("\nIteracao [{}]".format(i))
+        response_dict = {}
+        runTests(HOST, PORT)
+        response_df = response_df.append(response_dict, ignore_index=True)
+    
+    response_df.to_excel("resultados_testes_gRPC.xlsx")
+    response_df.describe().to_excel("resultados_analise_gRPC.xlsx")
+    print "FIM"

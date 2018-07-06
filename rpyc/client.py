@@ -12,18 +12,17 @@ import rpyc
 import time
 import pandas as pd
 
-function_tries = 20
+QTD_ITERACOES = 20
 
 response_df = pd.DataFrame()
 response_dict = {}
 
 def pegaTempo(f):
     def wrap(*args):
-        total = 0
         time1 = time.time()
         ret = f(*args)
         time2 = time.time()
-        total = total + (time2 - time1) + tempoStub
+        total = time2 - time1
         response_dict[f.__name__] = total * 1000
         return ret
     return wrap
@@ -101,7 +100,7 @@ def takeBoolean_ReturnBoolean():
 def takeObject_ReturnObject():
     return stub.root.obj(ObjectType())
 
-for i in range(function_tries):
+for i in range(QTD_ITERACOES):
     response_dict = {}
     stub = createStub()
     print(takeNothing_ReturnNothing())
@@ -119,6 +118,6 @@ for i in range(function_tries):
     print(takeObject_ReturnObject())
     response_df = response_df.append(response_dict, ignore_index=True)
 
-response_df.to_excel("resultados_testes.xlsx")
-response_df.describe().to_excel("resultados_analise.xlsx")
+response_df.to_excel("resultados_testes_RPyC.xlsx")
+response_df.describe().to_excel("resultados_analise_RPyC.xlsx")
 print(response_df)
