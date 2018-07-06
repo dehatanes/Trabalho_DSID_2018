@@ -1,0 +1,81 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. proto/my_remote_procedure_call.proto
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.my_remote_procedure_call";
+option java_outer_classname = "MyRemoteProcedureCall";
+option objc_class_prefix = "MRPC";
+
+package my_remote_procedure_call; 
+
+// The service definition.
+service DiferentOperationsHandler {
+  // Receives an int number and returns an int number
+  rpc takeIntNumber_ReturnIntNumber (IntNumberMessage) returns (IntNumberMessage) {}
+  // Receives 10 int numbers and returns an int number
+  rpc takeIntNumbers_ReturnIntNumber (TenIntNumbersMessage) returns (IntNumberMessage) {}
+  // Receives an int number and returns 10 int number
+  rpc takeIntNumber_ReturnIntNumbers (IntNumberMessage) returns (TenIntNumbersMessage) {}
+  // Receives a long int number and returns a long int number
+  rpc takeLongIntNumber_ReturnLongIntNumbers (LongIntNumberMessage) returns (LongIntNumberMessage) {}
+  // Receives a float numbers and returns a float number
+  rpc takeFloatNumber_ReturnFloatNumber (FloatNumberMessage) returns (FloatNumberMessage) {}
+  // Receives a string and returns a string
+  rpc takeString_ReturnString (StringMessage) returns (StringMessage) {}
+  // Receives an object and returns an object
+  rpc takeObject_ReturnObject (ObjectMessage) returns (ObjectMessage) {}
+}
+
+// MESSAGES TYPES
+message IntNumberMessage {
+  int32 item = 1;
+}
+
+message TenIntNumbersMessage {
+  int32 item1 = 1;
+  int32 item2 = 2;
+  int32 item3 = 3;
+  int32 item4 = 4;
+  int32 item5 = 5;
+  int32 item6 = 6;
+  int32 item7 = 7;
+  int32 item8 = 8;
+  int32 item9 = 9;
+  int32 item10 = 10;
+}
+
+message LongIntNumberMessage {
+  int64 item = 1;
+}
+
+message FloatNumberMessage {
+  float item = 1;
+}
+
+message StringMessage {
+  string item = 1;
+}
+
+message MyObject {
+  string nameAttribute = 1;
+  int32 ageAttribute = 2;
+  bool isNicePersonAttribute = 3;
+}
+message ObjectMessage {
+  MyObject item = 1;
+}
