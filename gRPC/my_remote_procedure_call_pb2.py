@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='my_remote_procedure_call.proto',
   package='my_remote_procedure_call',
   syntax='proto3',
-  serialized_pb=_b('\n\x1emy_remote_procedure_call.proto\x12\x18my_remote_procedure_call\" \n\x10IntNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x05\"\xad\x01\n\x14TenIntNumbersMessage\x12\r\n\x05item1\x18\x01 \x01(\x05\x12\r\n\x05item2\x18\x02 \x01(\x05\x12\r\n\x05item3\x18\x03 \x01(\x05\x12\r\n\x05item4\x18\x04 \x01(\x05\x12\r\n\x05item5\x18\x05 \x01(\x05\x12\r\n\x05item6\x18\x06 \x01(\x05\x12\r\n\x05item7\x18\x07 \x01(\x05\x12\r\n\x05item8\x18\x08 \x01(\x05\x12\r\n\x05item9\x18\t \x01(\x05\x12\x0e\n\x06item10\x18\n \x01(\x05\"$\n\x14LongIntNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x03\"\"\n\x12\x46loatNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x02\"\x1d\n\rStringMessage\x12\x0c\n\x04item\x18\x01 \x01(\t\"V\n\x08MyObject\x12\x15\n\rnameAttribute\x18\x01 \x01(\t\x12\x14\n\x0c\x61geAttribute\x18\x02 \x01(\x05\x12\x1d\n\x15isNicePersonAttribute\x18\x03 \x01(\x08\"A\n\rObjectMessage\x12\x30\n\x04item\x18\x01 \x01(\x0b\x32\".my_remote_procedure_call.MyObject2\x85\x07\n\x19\x44iferentOperationsHandler\x12y\n\x1dtakeIntNumber_ReturnIntNumber\x12*.my_remote_procedure_call.IntNumberMessage\x1a*.my_remote_procedure_call.IntNumberMessage\"\x00\x12~\n\x1etakeIntNumbers_ReturnIntNumber\x12..my_remote_procedure_call.TenIntNumbersMessage\x1a*.my_remote_procedure_call.IntNumberMessage\"\x00\x12~\n\x1etakeIntNumber_ReturnIntNumbers\x12*.my_remote_procedure_call.IntNumberMessage\x1a..my_remote_procedure_call.TenIntNumbersMessage\"\x00\x12\x8a\x01\n&takeLongIntNumber_ReturnLongIntNumbers\x12..my_remote_procedure_call.LongIntNumberMessage\x1a..my_remote_procedure_call.LongIntNumberMessage\"\x00\x12\x81\x01\n!takeFloatNumber_ReturnFloatNumber\x12,.my_remote_procedure_call.FloatNumberMessage\x1a,.my_remote_procedure_call.FloatNumberMessage\"\x00\x12m\n\x17takeString_ReturnString\x12\'.my_remote_procedure_call.StringMessage\x1a\'.my_remote_procedure_call.StringMessage\"\x00\x12m\n\x17takeObject_ReturnObject\x12\'.my_remote_procedure_call.ObjectMessage\x1a\'.my_remote_procedure_call.ObjectMessage\"\x00\x42?\n\x1dgrpc.my_remote_procedure_callB\x15MyRemoteProcedureCallP\x01\xa2\x02\x04MRPCb\x06proto3')
+  serialized_pb=_b('\n\x1emy_remote_procedure_call.proto\x12\x18my_remote_procedure_call\" \n\x10IntNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x05\"\xad\x01\n\x14TenIntNumbersMessage\x12\r\n\x05item1\x18\x01 \x01(\x05\x12\r\n\x05item2\x18\x02 \x01(\x05\x12\r\n\x05item3\x18\x03 \x01(\x05\x12\r\n\x05item4\x18\x04 \x01(\x05\x12\r\n\x05item5\x18\x05 \x01(\x05\x12\r\n\x05item6\x18\x06 \x01(\x05\x12\r\n\x05item7\x18\x07 \x01(\x05\x12\r\n\x05item8\x18\x08 \x01(\x05\x12\r\n\x05item9\x18\t \x01(\x05\x12\x0e\n\x06item10\x18\n \x01(\x05\"$\n\x14LongIntNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x03\"\"\n\x12\x46loatNumberMessage\x12\x0c\n\x04item\x18\x01 \x01(\x02\"\x1d\n\rStringMessage\x12\x0c\n\x04item\x18\x01 \x01(\t\"\x1e\n\x0e\x42ooleanMessage\x12\x0c\n\x04item\x18\x01 \x01(\x08\"V\n\x08MyObject\x12\x15\n\rnameAttribute\x18\x01 \x01(\t\x12\x14\n\x0c\x61geAttribute\x18\x02 \x01(\x05\x12\x1d\n\x15isNicePersonAttribute\x18\x03 \x01(\x08\"A\n\rObjectMessage\x12\x30\n\x04item\x18\x01 \x01(\x0b\x32\".my_remote_procedure_call.MyObject2\xf8\x07\n\x19\x44iferentOperationsHandler\x12y\n\x1dtakeIntNumber_ReturnIntNumber\x12*.my_remote_procedure_call.IntNumberMessage\x1a*.my_remote_procedure_call.IntNumberMessage\"\x00\x12~\n\x1etakeIntNumbers_ReturnIntNumber\x12..my_remote_procedure_call.TenIntNumbersMessage\x1a*.my_remote_procedure_call.IntNumberMessage\"\x00\x12~\n\x1etakeIntNumber_ReturnIntNumbers\x12*.my_remote_procedure_call.IntNumberMessage\x1a..my_remote_procedure_call.TenIntNumbersMessage\"\x00\x12\x8a\x01\n&takeLongIntNumber_ReturnLongIntNumbers\x12..my_remote_procedure_call.LongIntNumberMessage\x1a..my_remote_procedure_call.LongIntNumberMessage\"\x00\x12\x81\x01\n!takeFloatNumber_ReturnFloatNumber\x12,.my_remote_procedure_call.FloatNumberMessage\x1a,.my_remote_procedure_call.FloatNumberMessage\"\x00\x12m\n\x17takeString_ReturnString\x12\'.my_remote_procedure_call.StringMessage\x1a\'.my_remote_procedure_call.StringMessage\"\x00\x12q\n\x19takeBoolean_ReturnBoolean\x12(.my_remote_procedure_call.BooleanMessage\x1a(.my_remote_procedure_call.BooleanMessage\"\x00\x12m\n\x17takeObject_ReturnObject\x12\'.my_remote_procedure_call.ObjectMessage\x1a\'.my_remote_procedure_call.ObjectMessage\"\x00\x42?\n\x1dgrpc.my_remote_procedure_callB\x15MyRemoteProcedureCallP\x01\xa2\x02\x04MRPCb\x06proto3')
 )
 
 
@@ -243,6 +243,37 @@ _STRINGMESSAGE = _descriptor.Descriptor(
 )
 
 
+_BOOLEANMESSAGE = _descriptor.Descriptor(
+  name='BooleanMessage',
+  full_name='my_remote_procedure_call.BooleanMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='item', full_name='my_remote_procedure_call.BooleanMessage.item', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=375,
+  serialized_end=405,
+)
+
+
 _MYOBJECT = _descriptor.Descriptor(
   name='MyObject',
   full_name='my_remote_procedure_call.MyObject',
@@ -283,8 +314,8 @@ _MYOBJECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=375,
-  serialized_end=461,
+  serialized_start=407,
+  serialized_end=493,
 )
 
 
@@ -314,8 +345,8 @@ _OBJECTMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=463,
-  serialized_end=528,
+  serialized_start=495,
+  serialized_end=560,
 )
 
 _OBJECTMESSAGE.fields_by_name['item'].message_type = _MYOBJECT
@@ -324,6 +355,7 @@ DESCRIPTOR.message_types_by_name['TenIntNumbersMessage'] = _TENINTNUMBERSMESSAGE
 DESCRIPTOR.message_types_by_name['LongIntNumberMessage'] = _LONGINTNUMBERMESSAGE
 DESCRIPTOR.message_types_by_name['FloatNumberMessage'] = _FLOATNUMBERMESSAGE
 DESCRIPTOR.message_types_by_name['StringMessage'] = _STRINGMESSAGE
+DESCRIPTOR.message_types_by_name['BooleanMessage'] = _BOOLEANMESSAGE
 DESCRIPTOR.message_types_by_name['MyObject'] = _MYOBJECT
 DESCRIPTOR.message_types_by_name['ObjectMessage'] = _OBJECTMESSAGE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -363,6 +395,13 @@ StringMessage = _reflection.GeneratedProtocolMessageType('StringMessage', (_mess
   ))
 _sym_db.RegisterMessage(StringMessage)
 
+BooleanMessage = _reflection.GeneratedProtocolMessageType('BooleanMessage', (_message.Message,), dict(
+  DESCRIPTOR = _BOOLEANMESSAGE,
+  __module__ = 'my_remote_procedure_call_pb2'
+  # @@protoc_insertion_point(class_scope:my_remote_procedure_call.BooleanMessage)
+  ))
+_sym_db.RegisterMessage(BooleanMessage)
+
 MyObject = _reflection.GeneratedProtocolMessageType('MyObject', (_message.Message,), dict(
   DESCRIPTOR = _MYOBJECT,
   __module__ = 'my_remote_procedure_call_pb2'
@@ -387,8 +426,8 @@ _DIFERENTOPERATIONSHANDLER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=531,
-  serialized_end=1432,
+  serialized_start=563,
+  serialized_end=1579,
   methods=[
   _descriptor.MethodDescriptor(
     name='takeIntNumber_ReturnIntNumber',
@@ -445,9 +484,18 @@ _DIFERENTOPERATIONSHANDLER = _descriptor.ServiceDescriptor(
     options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='takeBoolean_ReturnBoolean',
+    full_name='my_remote_procedure_call.DiferentOperationsHandler.takeBoolean_ReturnBoolean',
+    index=6,
+    containing_service=None,
+    input_type=_BOOLEANMESSAGE,
+    output_type=_BOOLEANMESSAGE,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='takeObject_ReturnObject',
     full_name='my_remote_procedure_call.DiferentOperationsHandler.takeObject_ReturnObject',
-    index=6,
+    index=7,
     containing_service=None,
     input_type=_OBJECTMESSAGE,
     output_type=_OBJECTMESSAGE,

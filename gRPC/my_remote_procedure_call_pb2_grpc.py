@@ -44,6 +44,11 @@ class DiferentOperationsHandlerStub(object):
         request_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
         response_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
         )
+    self.takeBoolean_ReturnBoolean = channel.unary_unary(
+        '/my_remote_procedure_call.DiferentOperationsHandler/takeBoolean_ReturnBoolean',
+        request_serializer=my__remote__procedure__call__pb2.BooleanMessage.SerializeToString,
+        response_deserializer=my__remote__procedure__call__pb2.BooleanMessage.FromString,
+        )
     self.takeObject_ReturnObject = channel.unary_unary(
         '/my_remote_procedure_call.DiferentOperationsHandler/takeObject_ReturnObject',
         request_serializer=my__remote__procedure__call__pb2.ObjectMessage.SerializeToString,
@@ -97,6 +102,13 @@ class DiferentOperationsHandlerServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def takeBoolean_ReturnBoolean(self, request, context):
+    """Receives a boolean and returns a boolean
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def takeObject_ReturnObject(self, request, context):
     """Receives an object and returns an object
     """
@@ -136,6 +148,11 @@ def add_DiferentOperationsHandlerServicer_to_server(servicer, server):
           servicer.takeString_ReturnString,
           request_deserializer=my__remote__procedure__call__pb2.StringMessage.FromString,
           response_serializer=my__remote__procedure__call__pb2.StringMessage.SerializeToString,
+      ),
+      'takeBoolean_ReturnBoolean': grpc.unary_unary_rpc_method_handler(
+          servicer.takeBoolean_ReturnBoolean,
+          request_deserializer=my__remote__procedure__call__pb2.BooleanMessage.FromString,
+          response_serializer=my__remote__procedure__call__pb2.BooleanMessage.SerializeToString,
       ),
       'takeObject_ReturnObject': grpc.unary_unary_rpc_method_handler(
           servicer.takeObject_ReturnObject,

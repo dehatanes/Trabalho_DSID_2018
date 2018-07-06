@@ -37,6 +37,8 @@ service DiferentOperationsHandler {
   rpc takeFloatNumber_ReturnFloatNumber (FloatNumberMessage) returns (FloatNumberMessage) {}
   // Receives a string and returns a string
   rpc takeString_ReturnString (StringMessage) returns (StringMessage) {}
+  // Receives a boolean and returns a boolean
+  rpc takeBoolean_ReturnBoolean (BooleanMessage) returns (BooleanMessage) {}
   // Receives an object and returns an object
   rpc takeObject_ReturnObject (ObjectMessage) returns (ObjectMessage) {}
 }
@@ -69,6 +71,10 @@ message FloatNumberMessage {
 
 message StringMessage {
   string item = 1;
+}
+
+message BooleanMessage {
+  bool item = 1;
 }
 
 message MyObject {
