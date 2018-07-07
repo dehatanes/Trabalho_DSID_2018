@@ -7,12 +7,11 @@
 | Application       | [RPyC](https://rpyc.readthedocs.io/en/latest/# "RPyC's Homepage")                |                                                                                          |
 
 Universidade de São Paulo - USP
-Escola de Artes, Ciências e Humanidades - EACH
-ACH2147 - Desenvolvimento de Sistemas de Informação Distribuídos
+</br>Escola de Artes, Ciências e Humanidades - EACH
+</br>ACH2147 - Desenvolvimento de Sistemas de Informação Distribuídos
 
 Débora Atanes Buss......nUSP: 9276860
-
-Marcel Canhisares..........nUSP: 9360603
+</br>Marcel Canhisares..........nUSP: 9360603
 
 ## SOBRE
 
