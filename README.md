@@ -11,6 +11,7 @@ Escola de Artes, Ciências e Humanidades - EACH
 ACH2147 - Desenvolvimento de Sistemas de Informação Distribuídos
 
 Débora Atanes Buss......nUSP: 9276860
+
 Marcel Canhisares..........nUSP: 9360603
 
 ## SOBRE
