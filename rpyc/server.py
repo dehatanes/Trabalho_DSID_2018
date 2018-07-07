@@ -9,7 +9,6 @@ Marcel Canhisares			nUSP: 9360603
 """
 
 import rpyc
-import json
 port = 18861
 
 class MyService(rpyc.Service):
@@ -33,7 +32,7 @@ class MyService(rpyc.Service):
     
     # operação com um argumento String e valor de retorno String (4 args)
     def exposed_int10int1(self, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10):
-        return n1+n2+n3+n4+n5+n6+n7+n8+n9+n10
+        return n1
 
     # operação com um argumento String e valor de retorno String (8 args)
     def exposed_long(self, l1):

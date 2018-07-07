@@ -62,7 +62,8 @@ class CasosTeste():
     stub = None
     
     @pegaTempo
-    def createStub(self, channel):
+    def createStub(self, host, port):
+        channel = grpc.insecure_channel("{}:{}".format(host, port))
         self.stub = my_remote_procedure_call_pb2_grpc.DiferentOperationsHandlerStub(channel)
     @pegaTempo
     def takeNothing_ReturnNothing(self):
@@ -123,11 +124,10 @@ class CasosTeste():
 
 
 def runTests(host, port):
-    with grpc.insecure_channel("{}:{}".format(host, port)) as channel:
         casoTeste = CasosTeste()
         # Creating stub
         print "\tCreating stub..."
-        casoTeste.createStub(channel)
+        casoTeste.createStub(host, port)
         # Start the tests
         casoTeste.takeNothing_ReturnNothing()
         print "\tRunning takeNothing_ReturnNothing..."
@@ -167,5 +167,5 @@ if __name__ == '__main__':
         response_df = response_df.append(response_dict, ignore_index=True)
     
     response_df.to_excel("resultados_testes_gRPC.xlsx")
-    response_df.describe().to_excel("resultados_analise_gRPC.xlsx")
+    response_df.describe().transpose().to_excel("resultados_analise_gRPC.xlsx")
     print "FIM"

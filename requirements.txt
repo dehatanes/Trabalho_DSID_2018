@@ -1,2 +1,11 @@
+coverage>=4.0
+Cython==0.28.2
+enum34==1.1.6
+protobuf==3.5.0
+six==1.11.0
+wheel>=0.29
+pandas==0.23.0
 plumbum==1.6.6
 rpyc==4.0.1
+grpcio==1.13.0
+futures==3.2.0

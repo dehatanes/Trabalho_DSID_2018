@@ -39,7 +39,7 @@ class ObjectType(object):
 
 @pegaTempo
 def createStub():
-    return rpyc.connect("localhost", 18861)
+    return rpyc.connect("192.168.15.34", 18861)
 
 @pegaTempo
 def takeNothing_ReturnNothing():
@@ -119,5 +119,5 @@ for i in range(QTD_ITERACOES):
     response_df = response_df.append(response_dict, ignore_index=True)
 
 response_df.to_excel("resultados_testes_RPyC.xlsx")
-response_df.describe().to_excel("resultados_analise_RPyC.xlsx")
+response_df.describe().transpose().to_excel("resultados_analise_RPyC.xlsx")
 print(response_df)
